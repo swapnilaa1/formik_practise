@@ -1,4 +1,23 @@
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
+/*
+lecture 22. field Array ..
+in previous video we have seen that for multiple phone numbers we created that many fields but we want that..
+user will have one field for entering a phone number then user will decide to add more numbers 
+for this we will use field array method...
+
+1. import FieldArray from formik
+2. then we will create an array phNumbers which will have an single element which is an empty string..
+3. and in return we will use render prop method ..
+    we know the render props method we can write jsx code here.. and this gives us a way to write a arrow function 
+    and arraw function gives us a thing and that is FieldArrayProps...
+    we can console.log and see what FieldArrayProps provides us...
+    so there are many methods and objects that we get through fieldArrayProps...
+    among them we will see push pop remove and ..
+    we see we have form object here and if we click it we get values and in values we can see the all initialValues here..
+    so we can manipuate them here..
+
+*/
+
+import { ErrorMessage, Field, Form, FieldArray, Formik, useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import TextError from "./TextError";
@@ -12,7 +31,9 @@ const initialValues = {
   {
     facebook : "",
     twitter: ""
-  }
+  },
+  phoneNumbers: ["" , ""],
+  phNumbers: [""]
 };
 const onSubmit = (values) => {
   console.log("form _data", values);
@@ -127,6 +148,8 @@ const SimplfiedYoutube = () => {
                 </Field>
                {/*  <ErrorMessage name="comments" />*/}
                 </div>
+
+                {/* ...nested objects...*/}
                 <div className="mb-3">
                 <label htmlFor="facebook" className="form-label">Facebook </label>
                 <Field type="text" className="form-control" id="facebook" name="social.facebook" />
@@ -139,7 +162,56 @@ const SimplfiedYoutube = () => {
                 <Field type="text" className="form-control" id="twitter" name="social.twitter" />
                 {/*
                 <ErrorMessage name="channel" component={TextError} />*/}
+                {/*
+                here we have added nested object .. see the name attribute here .. 
+                name="social.twitter".. so for each nasted object we will we will use this concept...
+                */}
                 </div>
+
+                {/* Phone numbers in array ...*/}
+                <div className="mb-3">
+                <label htmlFor="primaryPh" className="form-label">Primary Phone Number </label>
+                <Field type="text" className="form-control" id="primaryPh" name="phoneNumbers[0]" />
+                {/*
+                <ErrorMessage name="channel" component={TextError} />*/}
+                </div>
+
+                <div className="mb-3">
+                <label htmlFor="secondaryPh" className="form-label">Primary Phone Number </label>
+                <Field type="text" className="form-control" id="secondaryPh" name="phoneNumbers[1]" />
+                {/*
+                <ErrorMessage name="channel" component={TextError} />*/}
+                {/* here we have added phone number field and we have used array for this..
+                for this
+                1... we have crated a initial state as array and then in return we are rendering that state but 
+                for this  we have used the initial state value ... and see the name attribute here
+                we have taken empty array of string and then in name attibute we are mentioning the index..*/}
+                </div>
+
+                  {/*for phone numbers..*/}
+                <div className="mb-3">
+                <label htmlFor="comments" className="form-label">Add Phone Numbers </label>
+                <FieldArray name='phNumbers'>
+                  {
+                    (FieldArrayPrps)=>{
+                    console.log("FieldArrayProps : " ,FieldArrayPrps);
+                    const { push , remove , form}=FieldArrayPrps;
+                    const { values} =form;
+                    const { phNumbers}=values;
+                    return (phNumbers.map((phNumber , index)=>(
+                      <div  key={index}>
+                          <Field name={`phNumbers[${index}]`} />
+                          { index>0 && (<button className="btn btn-danger" onClick={()=>remove(index)}>{' '}-{' '}</button>) }
+                          <button className="btn btn-primary" onClick={()=>push('')}>{' '}+{' '}</button>
+                      </div>
+                    ))
+                            )
+                    }
+                  }
+                </FieldArray>
+           
+                </div>
+                
                 
         <button type="submit" className="btn btn-danger">Submit</button>
       </Form>
