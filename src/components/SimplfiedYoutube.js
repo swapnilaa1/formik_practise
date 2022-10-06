@@ -7,7 +7,12 @@ const initialValues = {
   email: "",
   channel: "",
   comments: "",
-  address: ""
+  address: "",
+  social :
+  {
+    facebook : "",
+    twitter: ""
+  }
 };
 const onSubmit = (values) => {
   console.log("form _data", values);
@@ -96,11 +101,11 @@ const SimplfiedYoutube = () => {
                 <div className="mb-3">
 
                 <label htmlFor="address" className="form-label">Address </label>
-                <Field name="comments" className="form-control">
+                <Field name="address" className="form-control">
                     {
                         props => {
                             const { field , form , meta }=props
-                                console.log("render props" ,props);
+                              //  console.log("render props" ,props);
                                 return(
                                 <div><input id="address" type="text" className="form-control" {...field}/>
                                 { meta.touched && meta.error ?<div>{meta.error}</div>:null}</div>);
@@ -122,6 +127,20 @@ const SimplfiedYoutube = () => {
                 </Field>
                {/*  <ErrorMessage name="comments" />*/}
                 </div>
+                <div className="mb-3">
+                <label htmlFor="facebook" className="form-label">Facebook </label>
+                <Field type="text" className="form-control" id="facebook" name="social.facebook" />
+                {/*
+                <ErrorMessage name="channel" component={TextError} />*/}
+                </div>
+                
+                <div className="mb-3">
+                <label htmlFor="twitter" className="form-label">Twitter </label>
+                <Field type="text" className="form-control" id="twitter" name="social.twitter" />
+                {/*
+                <ErrorMessage name="channel" component={TextError} />*/}
+                </div>
+                
         <button type="submit" className="btn btn-danger">Submit</button>
       </Form>
     </Formik>
