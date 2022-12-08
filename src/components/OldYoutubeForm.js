@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 const initialValues = {
   name: "", //1... initialvalues contians the keys and those keys should be as same as the name attrubutes which are
   email: "", // there in the each input field..
@@ -31,11 +31,11 @@ const validate = (values) => {
   return errors;
 };
 
-const validationSchema = Yup.object({ 
-name : Yup.string().required('Required!'), /////schema1 
-email : Yup.string().email("inavalid email format").required("required"),
-channel : Yup.string().required("Required")
-}) 
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required!"), /////schema1
+  email: Yup.string().email("inavalid email format").required("required"),
+  channel: Yup.string().required("Required"),
+});
 /* 9..
 here we are creating a variable that is validation schema and to that we are assigning an object schema that is Yup.object
 and this also recieves an object.
@@ -57,12 +57,12 @@ const OldYoutubeForm = () => {
     here in place of validate function we are using validationSchema thats why we are commenting the validate function and the
     validationschema works same as validate function but this yup gives us validation facility*/
   });
-  console.log("formik errors" , formik.errors);
-  console.log("visited fields" , formik.touched);
+  console.log("formik errors", formik.errors);
+  console.log("visited fields", formik.touched);
   //console.log("formik values " ,formik.values ); //2. this will show us all input fields state...
   return (
     <div className="container ">
-      <form className="from-group " onSubmit={formik.handleSubmit}>
+      <form className="from-group" onSubmit={formik.handleSubmit}>
         {/*4....
         like pt 3.. as we have used onChange function ..
         here also for form submission we use handleSubmit function that is a handler which is predefined and we will 
@@ -96,7 +96,7 @@ const OldYoutubeForm = () => {
           we can console and see clg(formik.touched)..
 
           */}
-            {/*7... so our aim is that we want to display the error msgs after we visit the input field ..
+          {/*7... so our aim is that we want to display the error msgs after we visit the input field ..
           formik.touched.name .email .channel gives us true or false value.. 
           so when we come out of the input box then only we get the error msg displyed...*/}
           {/* 3...
@@ -120,7 +120,7 @@ const OldYoutubeForm = () => {
             value={formik.values.email}
             onBlur={formik.handleBlur}
           />
-        
+
           {formik.touched.email && formik.errors.email ? (
             <div className="alert alert-warning" role="alert">
               {formik.errors.email}

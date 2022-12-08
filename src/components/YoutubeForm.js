@@ -13,7 +13,7 @@ for this we will go through 4 steps
 
 2. Form
 for this we will go thropugh 3 steps..
-  1. import Form From yup package..
+  1. import Form From formik package..
   2. replace html form component by this formik Form component..
   3. Delete onSubmit as Form component provides this feature to us directly as we use it..
   
@@ -96,7 +96,7 @@ const YoutubeForm = () => {
     10..
     here in place of validate function we are using validationSchema thats why we are commenting the validate function and the
     validationschema works same as validate function but this yup gives us validation facility
-    */
+  */
 
   
   //console.log("formik errors" , formik.errors);
@@ -126,7 +126,7 @@ const YoutubeForm = () => {
             
             /*onChange={formik.handleChange}
             value={formik.values.name}
-            onBlur={formik.handleBlur}   instead of these 3 lines we have used {...formik.getField,Props('name')}
+            onBlur={formik.handleBlur}   instead of these 3 lines we have used {...formik.getFieldProps('name')}
             as the same code is getting used with the different name attribute..*/
           />
           {/*
@@ -155,7 +155,7 @@ const YoutubeForm = () => {
         */}
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor="email" className="form-label">
             Email address
           </label>
           <Field
